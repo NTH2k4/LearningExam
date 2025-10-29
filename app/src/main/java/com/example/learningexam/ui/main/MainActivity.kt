@@ -1,7 +1,7 @@
 package com.example.learningexam.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +12,13 @@ import com.example.learningexam.data.db.AppDatabase
 import com.example.learningexam.data.db.entity.Flower
 import com.example.learningexam.data.repository.FlowerRepository
 import com.example.learningexam.databinding.ActivityMainBinding
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val adapter = MainAdapter { flower ->
-
-    }
+//    private val adapter = MainAdapter { flower ->
+//
+//    }
+    private lateinit var adapter : MainAdapter
     private val viewModel : MainViewModel by viewModels {
         val db = AppDatabase.getDatabase(applicationContext)
         val repository = FlowerRepository(db.flowerDao())
@@ -35,6 +35,13 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        adapter = MainAdapter(
+            onItemClickListener = { flower ->
+                val intent = Intent(this, InfoFlowerActivity::class.java)
+                intent.putExtra("FLOWER", flower)
+                startActivity(intent)
+            }
+        )
 
         binding.rcListFlower.adapter = adapter
 

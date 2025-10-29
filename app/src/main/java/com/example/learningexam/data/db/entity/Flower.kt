@@ -2,6 +2,7 @@ package com.example.learningexam.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "flowers")
 data class Flower(
@@ -10,4 +11,4 @@ data class Flower(
     var description : String = "",
     var price : Double,
     var unit : String,
-)
+) : Serializable

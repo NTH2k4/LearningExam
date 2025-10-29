@@ -34,7 +34,10 @@ class MainAdapter(
             binding.txtDescription.text = flower.description.take(25)
             binding.txtUnit.text = "Đơn vị: " + flower.unit
             binding.txtPrice.text = "Giá: " + flower.price.toString()
-            itemView.setOnClickListener {
+//            itemView.setOnClickListener {
+//                onItemClickListener(flower)
+//            }
+            binding.root.setOnClickListener {
                 onItemClickListener(flower)
             }
         }
